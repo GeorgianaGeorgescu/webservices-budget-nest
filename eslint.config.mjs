@@ -31,6 +31,23 @@ export default tseslint.config(
       '@typescript-eslint/no-floating-promises': 'warn',
       '@typescript-eslint/no-unsafe-argument': 'warn',
       'prettier/prettier': ['error', { endOfLine: 'auto' }],
+      '@stylistic/no-multiple-empty-lines': ['error', {
+        max: 1, maxEOF: 1, maxBOF: 0,
+      }],
+      '@stylistic/indent': ['error', 2, { 'SwitchCase': 1 }],
+      '@stylistic/quotes': ['error', 'single'],
+      '@stylistic/semi': ['error', 'always'],
+      '@stylistic/comma-dangle': ['error', 'always-multiline'],
+      '@stylistic/no-tabs': ['error'],
+      '@stylistic/max-len': ['error', {
+        'code': 120,
+        'tabWidth': 2,
+      }],
+      '@stylistic/arrow-parens': ['error', 'always'],
+      '@stylistic/brace-style': ['error', '1tbs', { 'allowSingleLine': false }],
+      '@stylistic/no-inner-declarations': 'off',
+      '@typescript-eslint/consistent-type-imports': 'error',
+      '@typescript-eslint/no-empty-object-type': 'off',
     },
   },
 );
