@@ -7,6 +7,10 @@ import { PasswordModule } from './auth/password.module';
 import serverConfig from 'config/server.config';
 import tokenConfig from 'config/token.config';
 import { LoggerMiddleware } from './core/logger.middleware';
+import { TransactionController } from './transaction/transaction.controller';
+import { TransactionService } from './transaction/transaction.service';
+import { TransactionModule } from './transaction/transaction.module';
+import { PlaceModule } from './place/place.module';
 
 @Module({
   imports: [
@@ -19,9 +23,9 @@ import { LoggerMiddleware } from './core/logger.middleware';
     AuthModule,
     PrismaModule,
     PasswordModule,
+    TransactionModule,
+    PlaceModule,
   ],
-  controllers: [],
-  providers: [],
 })
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {

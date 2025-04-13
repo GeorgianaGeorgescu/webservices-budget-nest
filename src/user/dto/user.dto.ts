@@ -26,3 +26,8 @@ export class UpdateUserRequest{
 
 export class UpdateUserResponse extends PublicUserDto {}
 
+export interface UserSession {
+  id: number;
+  roles: string[];
+  email?: string;
+}
