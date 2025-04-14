@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { forwardRef, Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from 'src/data/prisma.service';
 import { CreateTransactionRequest, TransactionDto, UpdateTransactionRequest } from './dto/transaction.dto';
 import Role from '../core/roles'
@@ -9,6 +9,7 @@ import { PlaceService } from 'src/place/place.service';
 export class TransactionService {
     constructor(
         private prisma: PrismaService,
+        @Inject(forwardRef(() => PlaceService))
         private placeService: PlaceService
     ) {}
     

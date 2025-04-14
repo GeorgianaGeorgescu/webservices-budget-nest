@@ -11,7 +11,7 @@ export class TransactionController {
     constructor(private transactionService: TransactionService) {}
 
     @Get('')
-    async getAllUsers(@CurrentUser() user: UserSession): Promise<GetAllTransactionsResponse>{
+    async getAllTransactions(@CurrentUser() user: UserSession): Promise<GetAllTransactionsResponse>{
         return await this.transactionService.getAll(user.id,user.roles);
     }
 

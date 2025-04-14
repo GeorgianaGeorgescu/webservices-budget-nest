@@ -1,9 +1,9 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { TransactionService } from './transaction.service';
 import { TransactionController } from './transaction.controller';
-import { PlaceService } from 'src/place/place.service';
+import { PlaceModule } from 'src/place/place.module';
 
 @Module({ imports:[
     JwtModule.registerAsync({
@@ -16,7 +16,10 @@ import { PlaceService } from 'src/place/place.service';
           },
         }),
       }),
+      forwardRef(() => PlaceModule),
     ],
-  providers: [TransactionService, PlaceService],
-  controllers: [TransactionController],})
+  providers: [TransactionService],
+  controllers: [TransactionController],
+  exports:[TransactionService],
+})
 export class TransactionModule {}
