@@ -1,21 +1,31 @@
-import { IsInt, IsOptional, IsString, Max, MaxLength, Min } from "class-validator";
+import {
+    IsNumber,
+    IsString,
+  } from 'nestjs-swagger-dto';
 
 export class PlaceDto {
+    @IsString({name: 'name', maxLength: 255, description:'Get all places'})
     name: string;
+
+    @IsNumber({ name: 'rating', min:1, max:5})
     rating: number | null;
 }
 
 export class CreatePlaceRequest {
-    @IsString()
-    @MaxLength(255)
+    @IsString({name: 'name', maxLength: 255})
     name: string;
-  
-    @IsOptional()
-    @IsInt()
-    @Min(1)
-    @Max(5)
+    
+    @IsNumber({ name: 'rating', min:1, max:5})
     rating?: number;
 }
 
-export type UpdatePlaceRequest = CreatePlaceRequest;
+export class PlaceSummaryDto {
+    @IsNumber({ name: 'id', min: 1 })
+    id: number;
+  
+    @IsString({ name: 'name', maxLength: 255, example:"Place" })
+    name: string;
+  }
+
+export class UpdatePlaceRequest extends CreatePlaceRequest{};
 export type GetAllPlacesResponse = PlaceDto[];

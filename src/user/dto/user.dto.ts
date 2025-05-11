@@ -1,25 +1,41 @@
 import { Expose } from 'class-transformer';
-import { IsEmail, IsString, Length } from 'class-validator';
+import { IsEmail, Length } from 'class-validator';
+import { IsNumber, IsString } from 'nestjs-swagger-dto';
 
 export class PublicUserDto {
   @Expose()
+  @IsNumber({ name: 'id', min:1})
   id: number;
 
   @Expose()
+  @IsString({ name: 'name', minLength:2, maxLength:255})
   name: string;
 
   @Expose()
+  @IsString({
+    name: 'email',
+    example: 'user@email.com',
+    pattern: {
+      regex: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+      message: 'Invalid email format',
+    },
+  })
   email: string;
 }
 
 export class UpdateUserRequest{
 
-  @IsString()
-  @Length(2, 255)
+  @IsString({ name: 'name', minLength:2, maxLength:255})
   name?: string;
 
-  @IsString()
-  @IsEmail()
+  @IsString({
+    name: 'email',
+    example: 'user@email.com',
+    pattern: {
+      regex: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+      message: 'Invalid email format',
+    },
+  })
   email?: string;
 
 }

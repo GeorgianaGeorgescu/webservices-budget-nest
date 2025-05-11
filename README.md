@@ -1,30 +1,42 @@
+# Budget Backend with NestJS
+
 ## Before starting the project
 - Create a .env
 ``` 
 DATABASE_URL=mysql://<USERNAME>:<PASSWORD>@localhost:3306/<DATABASE_NAME>
-ARGON_HASH_LENGTH=length
-ARGON_TIME_COST=time
-ARGON_MEMORY_COST= memory
-AUTH_JWT_AUDIENCE=audience
-AUTH_JWT_ISSUER=issuer
+
+ARGON_HASH_LENGTH=32
+ARGON_TIME_COST=6
+ARGON_MEMORY_COST=131072
+
+AUTH_JWT_AUDIENCE=budget.hogent.be
+AUTH_JWT_ISSUER=budget.hogent.be
+
 ```
 - Create a .env.development
 ```
+
 NODE_ENV=development
-AUTH_JWT_SECRET=<YOUR-JWT-SECRET> 
-AUTH_JWT_EXPIRATION_INTERVAL=expiration
-PORT=port
+PORT=3000
+
+AUTH_JWT_SECRET=<YOUR-JWT-SECRET>
+AUTH_JWT_EXPIRATION_INTERVAL=3600
+
 LOG_LEVEL=silly
 LOG_DISABLED=false
+
 ```
 
 ## Project setup
 
 ```bash
+#install dependencies:
 $ yarn install
 
+#run prisma migrations
 $ yarn prisma migrate dev --name init
 
+#seed the database
 $ yarn prisma db seed
 ```
 
@@ -32,24 +44,12 @@ $ yarn prisma db seed
 
 ```bash
 # development
-$ yarn run start
+$ yarn start
 
 # watch mode
-$ yarn run start:dev
+$ yarn start:dev
 
 # production mode
-$ yarn run start:prod
+$ yarn start:prod
 ```
 
-## Run tests
-
-```bash
-# unit tests
-$ yarn run test
-
-# e2e tests
-$ yarn run test:e2e
-
-# test coverage
-$ yarn run test:cov
-```

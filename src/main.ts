@@ -4,6 +4,7 @@ import { ConfigService } from '@nestjs/config';
 import { HttpExceptionFilter } from './core/http-exception.filter';
 import { CustomLogger } from './core/customLogger';
 import { BadRequestException, ValidationError, ValidationPipe } from '@nestjs/common';
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -11,6 +12,7 @@ async function bootstrap() {
   const config = app.get(ConfigService);
   const port = config.get<number>('PORT');
 
+  app.setGlobalPrefix('api'); 
   app.useGlobalFilters(new HttpExceptionFilter());
   app.useLogger(new CustomLogger());
   app.useGlobalPipes(
@@ -22,6 +24,19 @@ async function bootstrap() {
       },
     }),
   );
+  
+  const swaggerConfig = new DocumentBuilder()
+    .setTitle('Budget Web Services')
+    .setDescription('API application')
+    .setVersion('1.0')
+    .addBearerAuth()
+    .build();
+
+  const document = SwaggerModule.createDocument(app, swaggerConfig);
+
+  SwaggerModule.setup('api-docs', app, document);
+
+
   await app.listen(port||3000);
 }
 

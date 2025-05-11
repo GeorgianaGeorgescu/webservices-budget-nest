@@ -9,7 +9,6 @@ import tokenConfig from 'config/token.config';
 import { LoggerMiddleware } from './core/logger.middleware';
 import { TransactionModule } from './transaction/transaction.module';
 import { PlaceModule } from './place/place.module';
-import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   imports: [
@@ -29,7 +28,7 @@ import { JwtModule } from '@nestjs/jwt';
 export class AppModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
-      .apply(LoggerMiddleware)
-      .forRoutes('*');
+    .apply(LoggerMiddleware)
+    .forRoutes('*path');
   }
 }

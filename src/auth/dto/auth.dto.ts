@@ -1,26 +1,41 @@
-import { IsEmail, IsString, Length } from "class-validator";
+import { IsString } from "nestjs-swagger-dto";
 
 export class LoginRequestDto {
-  @IsEmail()
-  @IsString()
+  
+  @IsString({
+    name: 'email',
+    example: 'user@email.com',
+    pattern: {
+      regex: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+      message: 'Invalid email format',
+    },
+  })
   email: string;
 
-  @Length(2, 255)
-  @IsString()
+  @IsString({name: 'password', minLength:2, maxLength:255})
   password: string;
 }
 
 export class RegisterRequestDto {
-  @IsString()
-  @Length(2, 255)
-  @IsString()
+  
+  @IsString({ name: 'name', minLength:2, maxLength:255})
   name: string;
 
-  @IsEmail()
-  @IsString()
+  @IsString({
+    name: 'email',
+    example: 'user@email.com',
+    pattern: {
+      regex: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+      message: 'Invalid email format',
+    },
+  })
   email: string;
 
-  @Length(2, 255)
-  @IsString()
+  @IsString({name: 'password', minLength:2, maxLength:255})
   password: string;
+}
+
+export class LoginResponse {
+  @IsString()
+  token: string;
 }

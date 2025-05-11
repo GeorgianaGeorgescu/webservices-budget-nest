@@ -1,36 +1,39 @@
-import { Type } from "class-transformer";
-import { IsDate, IsInt, IsNotEmpty, IsNumber, IsOptional, IsPositive, Max, MaxDate, Min } from "class-validator";
+import {MaxDate} from "class-validator";
+import {
+    IsNumber,
+    IsDate,
+    IsNested,
+  } from 'nestjs-swagger-dto';
+import { PlaceSummaryDto } from "src/place/dto/place.dto";
+import { PublicUserDto } from "src/user/dto/user.dto";
 
 export class TransactionDto {
+    
+    @IsNumber({ name:'amount',min:1})
     amount: number;
+
+    @IsDate({format: 'date-time', name:'date'})
+    @MaxDate(() => new Date())
     date: Date;
-    user: {
-        id: number;
-        name: string;
-    };
-    place: {
-        id: number;
-        name: string;
-    };
+
+    @IsNested({ name: 'user', type: PublicUserDto})
+    user: Pick<PublicUserDto, 'id' | 'name'>;  
+
+    @IsNested({ name: 'place', type: PlaceSummaryDto})
+    place: PlaceSummaryDto
 }
 
 export class UpdateTransactionRequest {
 
-    @IsNumber()
-    @IsInt()
-    @IsPositive()
+    @IsNumber({ name:'placeId', min:1})
     placeId: number;
   
-    @IsNumber()
-    @Min(1)
+    @IsNumber({ name:'amount',min:1})
     amount: number;
   
-    @IsDate()
-    @IsNotEmpty()
+    @IsDate({format: 'date-time', name:'date'})
     @MaxDate(() => new Date())
-    @Type(() => Date)
     date: Date;
 }
-
-export type CreateTransactionRequest = UpdateTransactionRequest;
+export class CreateTransactionRequest extends UpdateTransactionRequest {}
 export type GetAllTransactionsResponse = TransactionDto[];

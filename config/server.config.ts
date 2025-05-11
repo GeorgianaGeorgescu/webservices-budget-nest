@@ -7,7 +7,7 @@ export default registerAs(ServerConfigName, () => ({
   port: parseInt(process.env.PORT || '3000'),
   auth: {
     hashLength: parseInt(process.env.HASH_LENGTH || '32'),
-    timeCost: parseInt(process.env.HASH_TIME_COST || '3'),
+    timeCost: parseInt(process.env.HASH_TIME_COST || '6'),
     memoryCost: parseInt(process.env.HASH_MEMORY_COST || '65536'),
   },
   
