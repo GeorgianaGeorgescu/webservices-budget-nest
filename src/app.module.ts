@@ -9,6 +9,7 @@ import tokenConfig from 'config/token.config';
 import { LoggerMiddleware } from './core/logger.middleware';
 import { TransactionModule } from './transaction/transaction.module';
 import { PlaceModule } from './place/place.module';
+import { HealthController } from './health/health.controller';
 
 @Module({
   imports: [
@@ -24,11 +25,14 @@ import { PlaceModule } from './place/place.module';
     TransactionModule,
     PlaceModule,
   ],
+  controllers: [HealthController],
 })
 export class AppModule {
-  configure(consumer: MiddlewareConsumer) {
-    consumer
-    .apply(LoggerMiddleware)
-    .forRoutes('*path');
+ configure(consumer: MiddlewareConsumer) {
+    const isLoggingDisabled = process.env.LOG_DISABLED === 'true';
+
+    if (!isLoggingDisabled) {
+      consumer.apply(LoggerMiddleware).forRoutes('*');
+    }
   }
 }
