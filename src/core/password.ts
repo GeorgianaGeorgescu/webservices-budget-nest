@@ -1,4 +1,4 @@
-import argon2 from 'argon2';
+import * as argon2 from 'argon2';
 
 const hashLength = parseInt(process.env.HASH_LENGTH || '32'); 
 const timeCost = parseInt(process.env.HASH_TIME_COST || '3');

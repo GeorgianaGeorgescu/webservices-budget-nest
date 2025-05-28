@@ -3,7 +3,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtModule } from '@nestjs/jwt';
 import { TransactionService } from './transaction.service';
 import { TransactionController } from './transaction.controller';
-import { PlaceModule } from 'src/place/place.module';
+import { PlaceModule } from '../place/place.module';
 
 @Module({ imports:[
     JwtModule.registerAsync({

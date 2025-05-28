@@ -1,9 +1,9 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post, Put, UseGuards } from '@nestjs/common';
 import { TransactionService } from './transaction.service';
-import { AuthGuard } from 'src/guards/auth.guard';
-import { CurrentUser } from 'src/core/decorators/currentUser.decorator';
+import { AuthGuard } from '../guards/auth.guard';
+import { CurrentUser } from '../core/decorators/currentUser.decorator';
 import { CreateTransactionRequest, GetAllTransactionsResponse, TransactionDto, UpdateTransactionRequest } from './dto/transaction.dto';
-import { UserSession } from 'src/user/dto/user.dto';
+import { UserSession } from '../user/dto/user.dto';
 import { ApiBearerAuth, ApiResponse } from '@nestjs/swagger';
 
 @ApiBearerAuth()
@@ -63,6 +63,7 @@ export class TransactionController {
     }
     
     @Delete(':id')
+    @HttpCode(HttpStatus.NO_CONTENT)
     async deleteTransaction(
         @Param('id', ParseIntPipe) id: number,
         @CurrentUser() user: UserSession

@@ -1,10 +1,10 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Put, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Put, UseGuards } from '@nestjs/common';
 import { UserService } from './user.service';
-import { AuthGuard } from 'src/guards/auth.guard';
-import { CheckUserAccessGuard } from 'src/guards/userAccess.guard';
-import { ParseUserIdPipe } from 'src/core/pipes/parseUserId.pipe';
-import { CurrentUser } from 'src/core/decorators/currentUser.decorator';
-import { AdminGuard } from 'src/guards/roles.guard';
+import { AuthGuard } from '../guards/auth.guard';
+import { CheckUserAccessGuard } from '../guards/userAccess.guard';
+import { ParseUserIdPipe } from '../core/pipes/parseUserId.pipe';
+import { CurrentUser } from '../core/decorators/currentUser.decorator';
+import { AdminGuard } from '../guards/roles.guard';
 import { PublicUserDto, UpdateUserRequest, UpdateUserResponse, UserSession } from './dto/user.dto';
 import { ApiBearerAuth, ApiParam, ApiResponse } from '@nestjs/swagger';
 
@@ -45,6 +45,7 @@ export class UserController {
 
 
   @Delete(':id')
+  @HttpCode(HttpStatus.NO_CONTENT)
   @UseGuards(CheckUserAccessGuard) 
   async deleteUserById(@Param('id', ParseIntPipe) id: number):Promise<void>{
     return await this.userService.deleteById(id);

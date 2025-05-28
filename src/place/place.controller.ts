@@ -1,11 +1,11 @@
-import { Body, Controller, Delete, forwardRef, Get, Inject, Param, ParseIntPipe, Post, Put, UseGuards } from '@nestjs/common';
-import { AuthGuard } from 'src/guards/auth.guard';
+import { Body, Controller, Delete, forwardRef, Get, HttpCode, HttpStatus, Inject, Param, ParseIntPipe, Post, Put, UseGuards } from '@nestjs/common';
+import { AuthGuard } from '../guards/auth.guard';
 import { PlaceService } from './place.service';
 import { CreatePlaceRequest, GetAllPlacesResponse, PlaceDto, UpdatePlaceRequest } from './dto/place.dto';
-import { CurrentUser } from 'src/core/decorators/currentUser.decorator';
-import { UserSession } from 'src/user/dto/user.dto';
-import { GetAllTransactionsResponse, TransactionDto } from 'src/transaction/dto/transaction.dto';
-import { TransactionService } from 'src/transaction/transaction.service';
+import { CurrentUser } from '../core/decorators/currentUser.decorator';
+import { UserSession } from '../user/dto/user.dto';
+import { GetAllTransactionsResponse, TransactionDto } from '../transaction/dto/transaction.dto';
+import { TransactionService } from '../transaction/transaction.service';
 import { ApiBearerAuth, ApiResponse } from '@nestjs/swagger';
 
 @ApiBearerAuth()
@@ -68,6 +68,7 @@ export class PlaceController {
     }
     
     @Delete(':id')
+    @HttpCode(HttpStatus.NO_CONTENT)
     async deletePlace(
         @Param('id', ParseIntPipe) id: number
     ): Promise<void>

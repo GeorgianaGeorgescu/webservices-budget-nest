@@ -53,3 +53,17 @@ $ yarn start:dev
 $ yarn start:prod
 ```
 
+## Test the project
+
+- Create a .env.test
+```
+ENV_FILE=.env.test
+NODE_ENV=testing
+DATABASE_URL=mysql://<USERNAME>:<PASSWORD>@localhost:3306/<DATABASE_NAME>
+AUTH_JWT_SECRET=secret
+```
+
+```bash
+# run tests
+$ yarn test:e2e
+```

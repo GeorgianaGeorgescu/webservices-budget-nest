@@ -1,7 +1,7 @@
 import { forwardRef, Module } from '@nestjs/common';
 import { PlaceService } from './place.service';
 import { PlaceController } from './place.controller';
-import { TransactionModule } from 'src/transaction/transaction.module';
+import { TransactionModule } from '../transaction/transaction.module';
 import { JwtModule } from '@nestjs/jwt';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 

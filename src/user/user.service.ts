@@ -1,8 +1,8 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { PrismaService } from 'src/data/prisma.service';
+import { PrismaService } from '../data/prisma.service';
 import { PublicUserDto, UpdateUserRequest, UpdateUserResponse } from './dto/user.dto';
 import { plainToInstance } from 'class-transformer';
-import { handleDBError } from 'src/core/handleDBError';
+import { handleDBError } from '../core/handleDBError';
 
 @Injectable()
 export class UserService {

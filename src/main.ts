@@ -19,8 +19,16 @@ async function bootstrap() {
     new ValidationPipe({
       whitelist: true,
       transform: true,
-      exceptionFactory: (validationErrors: ValidationError[] = []) => {
-        return new BadRequestException(validationErrors);
+      exceptionFactory: (errors: ValidationError[] = []) => {
+        const formattedErrors = errors.reduce((acc, err) => {
+          acc[err.property] = Object.values(err.constraints || {});
+          return acc;
+        }, {} as Record<string, string[]>);
+
+        return new BadRequestException({
+          code: 'VALIDATION_FAILED',
+          details: { body: formattedErrors },
+        });
       },
     }),
   );

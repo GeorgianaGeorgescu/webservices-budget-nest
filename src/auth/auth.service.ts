@@ -1,10 +1,10 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { LoginRequestDto, RegisterRequestDto } from './dto/auth.dto';
 import { JwtService } from '@nestjs/jwt';
-import { PrismaService } from 'src/data/prisma.service';
+import { PrismaService } from '../data/prisma.service';
 import { PasswordService } from './password.service';
 import Role from '../core/roles';
-import { handleDBError } from 'src/core/handleDBError';
+import { handleDBError } from '../core/handleDBError';
 
 @Injectable()
 export class AuthService {

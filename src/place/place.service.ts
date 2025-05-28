@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { PrismaService } from 'src/data/prisma.service';
+import { PrismaService } from '../data/prisma.service';
 import { CreatePlaceRequest, GetAllPlacesResponse, PlaceDto, UpdatePlaceRequest } from './dto/place.dto';
-import { handleDBError } from 'src/core/handleDBError';
+import { handleDBError } from '../core/handleDBError';
 
 @Injectable()
 export class PlaceService {

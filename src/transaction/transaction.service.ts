@@ -1,9 +1,9 @@
 import { forwardRef, Inject, Injectable, NotFoundException } from '@nestjs/common';
-import { PrismaService } from 'src/data/prisma.service';
+import { PrismaService } from '../data/prisma.service';
 import { CreateTransactionRequest, TransactionDto, UpdateTransactionRequest } from './dto/transaction.dto';
 import Role from '../core/roles'
-import { handleDBError } from 'src/core/handleDBError';
-import { PlaceService } from 'src/place/place.service';
+import { handleDBError } from '../core/handleDBError';
+import { PlaceService } from '../place/place.service';
 
 @Injectable()
 export class TransactionService {

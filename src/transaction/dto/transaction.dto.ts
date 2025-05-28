@@ -4,8 +4,8 @@ import {
     IsDate,
     IsNested,
   } from 'nestjs-swagger-dto';
-import { PlaceSummaryDto } from "src/place/dto/place.dto";
-import { PublicUserDto } from "src/user/dto/user.dto";
+import { PlaceSummaryDto } from "../../place/dto/place.dto";
+import { PublicUserDto } from "../../user/dto/user.dto";
 
 export class TransactionDto {
     
@@ -28,7 +28,7 @@ export class UpdateTransactionRequest {
     @IsNumber({ name:'placeId', min:1})
     placeId: number;
   
-    @IsNumber({ name:'amount',min:1})
+    @IsNumber({ name:'amount'})
     amount: number;
   
     @IsDate({format: 'date-time', name:'date'})
